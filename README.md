@@ -1,5 +1,3 @@
-# Blackjack-8
+# Group8-2
 
-This repository is for group 8's blackjack game!
-
-Travis Status: [![Build Status](https://travis-ci.org/cs361-W16/Blackjack-8.svg?branch=master)](https://travis-ci.org/cs361-W16/Blackjack-8)
+Travis Status: [![Build Status](https://travis-ci.org/cs361-W16/Group8-2.svg?branch=master)](https://travis-ci.org/cs361-W16/Group8-2)
