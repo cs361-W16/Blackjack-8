@@ -27,7 +27,19 @@ import ninja.params.PathParam;
 @Singleton
 public class ApplicationController {
 
-    public Result index() {
+    public Result Blackjack() {
+        return Results.html().template("views/Blackjack/Blackjack.ftl.html");
+    }
+	
+	public Result TheGame() {
+        return Results.html().template("views/Blackjack/TheGame.ftl.html");
+    }
+	
+	public Result Money() {
+        return Results.html().template("views/Blackjack/Money.html");
+    }
+	
+	public Result index() {
         return Results.html();
     }
 	
