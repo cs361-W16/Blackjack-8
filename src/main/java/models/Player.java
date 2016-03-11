@@ -8,19 +8,19 @@ import java.util.ArrayList;
 public class Player{
     public int pot;
     public int PlayerBet;
-    public java.util.List<Cards> hand;
+    public java.util.List<Cards> PlayerHand;
     boolean turnEnd;
 
     public Player(){
         super();
         pot = 100;
         PlayerBet = 0;
-        hand = new ArrayList<>();
+        PlayerHand = new ArrayList<>();
         turnEnd = false;
     }
 
     public void addHand(Cards card){
-        hand.add(card);
+        PlayerHand.add(card);
     }
 
     //Four actions for player: hit, stand, double down, or spit
@@ -59,8 +59,8 @@ public class Player{
         int sum = 0;
         int suitValue;
         int aces = 0;
-        for (int i = 0; i < hand.size(); i++) {
-            suitValue = hand.get(i).getValue();
+        for (int i = 0; i < PlayerHand.size(); i++) {
+            suitValue = PlayerHand.get(i).getValue();
             if (suitValue > 9){
                 suitValue = 10;
             }else if(suitValue == 1){
@@ -70,9 +70,7 @@ public class Player{
             sum += suitValue;
         }
 
-        if(sum == 21) {
-            System.out.printf("YOU WIN!");
-        }else if(sum > 21) {
+        if(sum > 21) {
             for (int i = 0; i < aces; i++) {
                 sum -= 10;
                 if (sum < 22)
