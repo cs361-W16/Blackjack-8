@@ -43,9 +43,7 @@ public class Dealer{
             sum += suitValue;
         }
 
-        if(sum == 21) {
-            System.out.printf("YOU WIN!");
-        }else if(sum > 21){
+        if(sum > 21){
             for(int i = 0; i < aces; i++) {
                 sum -= 10;
                 if (sum < 22)
@@ -53,5 +51,12 @@ public class Dealer{
             }
         }
         return sum;
+    }
+
+    public void less17(ArrayList<Cards> deck){
+        while(getValueTotal() < 17){
+            hit(deck);
+        }
+        stand();
     }
 }
