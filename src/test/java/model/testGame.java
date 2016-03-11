@@ -13,21 +13,18 @@ public class testGame {
         Game g = new Game();
         assertNotNull(g);
     }
-
     @Test
     public void testGameInitialize(){
         Game g = new Game();
         g.shuffle();
         assertNotEquals(2,g.deck.get(0).getValue());
     }
-
     @Test
     public void testBuildDeck(){
         Game g = new Game();
         g.buildDeck();
         assertEquals(48,g.deck.size());
     }
-
     @Test
     public void testGameStart(){
         Game g = new Game();
@@ -35,7 +32,6 @@ public class testGame {
         g.buildDeck();
         g.shuffle();
     }
-
     @Test
     public void testDealTwo(){
         Game g = new Game();
