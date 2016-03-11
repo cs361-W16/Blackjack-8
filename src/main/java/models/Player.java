@@ -3,7 +3,7 @@ package models;
 import java.util.ArrayList;
 
 /**
- * Reference: Group 11 by 2016.
+ *
  */
 public class Player{
     public int pot;
@@ -14,7 +14,7 @@ public class Player{
     public Player(){
         super();
         pot = 100;
-        PlayerBet = 0;
+        PlayerBet = 2;
         PlayerHand = new ArrayList<>();
         turnEnd = false;
     }
@@ -33,17 +33,17 @@ public class Player{
         turnEnd = true;
     }
 
-    public boolean bet(int bet){
-        if(bet > pot || bet < 0){
+    public boolean bet(){
+        if(PlayerBet > pot){
             return false;
         }else{
-            PlayerBet = bet;
+            pot = pot - PlayerBet;
             return true;
         }
     }
 
     public boolean doubleDown(ArrayList<Cards> deck){
-        if(bet(PlayerBet*2) == false){
+        if(!bet()){
             return false;
         }else{
             hit(deck);

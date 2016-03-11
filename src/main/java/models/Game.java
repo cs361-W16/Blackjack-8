@@ -36,9 +36,14 @@ public class Game {
     }
 
     public void dealTwo() {
-        for (int i = 0; i < 2; i++) {
-            dealer.hit(deck);
-            player.hit(deck);
+        if(player.bet())
+        {
+            for (int i = 0; i < 2; i++) {
+                dealer.hit(deck);
+                player.hit(deck);
+            }
+        }else {
+            //Error Message
         }
     }
 }
