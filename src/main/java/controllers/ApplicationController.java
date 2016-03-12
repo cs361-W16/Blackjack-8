@@ -39,6 +39,10 @@ public class ApplicationController {
         return Results.html().template("views/Blackjack/Money.html");
     }
 	
+	public Result Rules() {
+        return Results.html().template("views/Blackjack/Rules.html");
+    }
+	
 	public Result index() {
         return Results.html();
     }
