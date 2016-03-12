@@ -1,13 +1,74 @@
 <#import "../layout/defaultLayout.ftl.html" as layout> 
 <@layout.myLayout "Blackjack...">    
 
-<body style="text-align: center; background-color: black; color: white;">
-<div><h1>THE GAME PAGE</h1></div>
-<p>for the actual blackjack game</p>
-<div>
-<a href="/Blackjack"><image style="position: relative;" src="https://dl.dropboxusercontent.com/u/8948398/coollogo_com-8726295.gif"/>
-<h1 style="position: absolute; top: 214px; left: 10px; width: 100%; font-weight: 800; color: black; font-size: 52px; letter-spacing: 21px;">BLACKJACK</h1></a>
+<link href="../../assets/css/custom.css" rel="stylesheet">
+
+<body style="text-align: center; background: radial-gradient(black, #222222); color: white;">
+
+<div style="width: 100%; height: 80px; border:solid white 1px; vertical-align:top;">
+
+	<div style="float:left; max-width: 50%; margin-top: 10px;">
+		<h1 style="position: relative; display: inline; max-width: 50%; text-align: left; margin-left: 25px;">THE GAME PAGE</h1><BR>
+		<p style="position: relative; display: inline; max-width: 50%; text-align: left; margin-left: 30px;">for the actual blackjack game</p>
+	</div>
+
+	<div style="float:right; max-width: 50%;">
+		<a style="text-align: right;" href="/Blackjack"><image style=" display: inline; position: relative; 
+		  margin-left: 30%; max-width: 60%; height: 100%;" src="https://dl.dropboxusercontent.com/u/8948398/gr8test.png"/><BR>
+		<image style="display: inline; position: relative; margin-left: 30%; max-width: 70%;
+		  height: 35px;" src="https://dl.dropboxusercontent.com/u/8948398/blackjack.png"/></a>
+	</div>
+  
 </div>
+
+<BR>
+
+<div class="outer_container">
+		
+		<div style="position:absolute; width: 100%; top: 0px;">
+				<div class="dealer">
+					<table>
+						<tr><td><p>this table holds the dealer's cards</p></td></tr>
+					</table>
+					<div style="position: absolute; width: 100%; bottom: 0px;">
+							<button id="deal">DEAL</button>
+					</div>
+				</div>
+
+				<div class="rules">
+					<p style="font-size: 20px;">Rules</p>
+					<object type="text/html" data="/Rules" style=" width: 90%; height: 75%; color: white;""></object>
+				</div>	
+		</div>
+		
+		<BR>
+		<BR>
+		
+		<div style="position:absolute; width: 100%; bottom: 0px;">
+				<div class="player">
+					<table>
+						<tr><td><p>this table holds the player's cards</p></td></tr>
+					</table>
+					<table>
+						<tr><td><p>if split use this table</p></td></tr>
+					</table>
+					<div style="position: absolute; width: 100%; bottom: 0px;">
+							<button id="hit">HIT</button>
+							<button id="stay">STAY</button>
+							<button id="split">SPLIT</button>
+					</div>
+				</div>
+
+				<div class="money">
+					<p style="font-size: 20px;">Money</p>
+					<object type="text/html" data="/Money" style="width: 90%; height: 75%; color: white;"></object>
+				</div>
+		</div>
+
+</div>
+
+<BR>
+
 </body>
 
 </@layout.myLayout>
