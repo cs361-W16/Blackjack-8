@@ -18,6 +18,7 @@ public class Game {
         player = new Player();
         dealer = new Dealer();
         dealTwo();
+        //should call a play function that loops until win status has happened
     }
 
     public void buildDeck(){
