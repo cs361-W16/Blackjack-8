@@ -7,8 +7,10 @@ import java.util.ArrayList;
  */
 public class Player{
     public int pot;
+    public int split;
     public int PlayerBet;
     public java.util.List<Cards> PlayerHand;
+    public java.util.List<Cards> SplitHand = new ArrayList<>();
     boolean turnEnd;
 
     public Player(){
@@ -52,8 +54,15 @@ public class Player{
         }
     }
 
-    //split
-    //public int split
+    // split to temp hand, then move half of origninal hand to SplitHand
+    public void split(){
+        split = 1;
+        Cards tmp;
+        tmp = PlayerHand.get(PlayerHand.size()-1);
+        SplitHand.add(tmp);
+        PlayerHand.remove(PlayerHand.size()-1);
+        bet();
+    }
 
     public int getValueTotal(){
         int sum = 0;

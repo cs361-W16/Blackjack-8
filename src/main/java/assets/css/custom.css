@@ -1,3 +1,86 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
 
+div{
+	display: block;
+}
+
+button{
+	
+	color: white; 
+	border-radius: 5px; 
+	width: 32%; 
+	height: 7%; 
+	background-color: #aaaaaa;
+	margin-bottom: 2px;
+	
+}
+
+table{
+	
+	border: solid white 1px;
+	background-color: grey;
+	height: 84px;
+	
+}
+
+tr{
+	
+	border: solid white 1px;
+	background-color: #222222;
+	
+}
+
+.outer_container{
+	
+	float:none;
+	padding-bottom: 50px;
+	height: 400px;
+	border: solid white 1px;
+	position:relative;
+	
+}
+
+.dealer{
+	left:0px;
+	border: solid white 1px;
+	max-width:50%;
+	height: 200px;
+	width:50%;
+	position: absolute;
+	top:0px;
+	vertical-align: bottom;
+}
+
+.rules{
+	right: 0px;
+	border: solid white 1px;
+	max-width:50%;
+	height: 200px;
+	width:50%;
+	position: absolute;
+	top:0px;
+	vertical-align: bottom;
+}
+
+.player{
+	left: 0px;
+	border: solid white 1px;
+	max-width:50%;
+	height: 200px;
+	width:50%;
+	position: absolute;
+	bottom:0px;
+	vertical-align: bottom;
+}
+
+.money{
+	right:0px;
+	border: solid white 1px;
+	max-width:50%;
+	height: 200px;
+	width:50%;
+	position: absolute;
+	bottom:0px;
+	vertical-align: bottom;
+}
