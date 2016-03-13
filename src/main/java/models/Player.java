@@ -1,5 +1,6 @@
 package models;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +55,7 @@ public class Player{
         }
     }
 
-    // split to temp hand, then move half of origninal hand to SplitHand
+    // split to temp hand, then move half of original hand to SplitHand
     public void split(){
         split = 1;
         Cards tmp;
@@ -88,4 +89,25 @@ public class Player{
         }
         return sum;
     }
+
+    public int getCardValue(int index)
+    {
+        if(PlayerHand.size() < index)
+        {
+            return 0;
+        } else {
+            return PlayerHand.get(index).getValue();
+        }
+    }
+
+    public Suit getCardSuit(int index)
+    {
+        if(PlayerHand.size() < index)
+        {
+            return Suit.BadSuit;
+        } else {
+            return PlayerHand.get(index).getSuit();
+        }
+    }
+
 }
