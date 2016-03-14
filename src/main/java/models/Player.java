@@ -171,7 +171,7 @@ public class Player{
 	
 	public void winnings(int theWinnings){
 		
-		pot = pot+theWinnings;
+		pot = pot+(PlayerBet*theWinnings);
 		
 	}
 }
