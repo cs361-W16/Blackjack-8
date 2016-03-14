@@ -73,7 +73,7 @@
 
 var game;
 var replaceSuit;
-var stayClick = false;
+var hideCard = false;
 
 function display(game) {
 console.log(game);
@@ -101,7 +101,7 @@ $( '.money .bank' ).html("");
 
 function hideify(key, val){
 		
-		if((key == 0) && (stayClick == false)){
+		if((key == 0) && (hideCard == false)){
 			return "<td><p style=\"margin-top: 5px;\">. . .</p><BR><p class=\"suit\">?</p></td>";
 		}else{
 			return "<td><p style=\"margin-top: 5px;\">"+val.value+"</p><BR><p class=\"suit\">"+symbolize(val.suit)+"</p></td>";
@@ -133,6 +133,7 @@ game = data;
 <!-- buttons -->
 
 $("#deal").click(function(){
+hideCard = false;
 $.ajax({
   type: "POST",
   url: "/deal",
@@ -146,6 +147,7 @@ $.ajax({
 });
 
 $("#hit").click(function(){
+hideCard = false;
 $.ajax({
   type: "POST",
   url: "/hit",
@@ -159,7 +161,7 @@ $.ajax({
 });
 
 $("#stay").click(function(){
-stayClick = true;
+hideCard = true;
 $.ajax({
   type: "POST",
   url: "/stay",
@@ -173,6 +175,7 @@ $.ajax({
 });
 
 $("#split").click(function(){
+hideCard = false;
 $.ajax({
   type: "POST",
   url: "/split",
@@ -186,6 +189,7 @@ $.ajax({
 });
 
 $("#doubled").click(function(){
+hideCard = true;
 $.ajax({
   type: "POST",
   url: "/doubled",
