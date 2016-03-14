@@ -15,7 +15,7 @@ public class testPlayer
         Cards c1 = new Cards(2, Suit.Diamonds);
 
         test.addHand(c1);
-        assertEquals(2, test.getCardValue(0));
+        assertEquals(2, test.cardValue(0));
         assertEquals(Suit.Diamonds, test.getCardSuit(0));
     }
 
@@ -26,9 +26,9 @@ public class testPlayer
         Cards c1 = new Cards(2, Suit.Diamonds);
 
         test.addHand(c1);
-        assertEquals(2, test.getCardValue(0));
+        assertEquals(2, test.cardValue(0));
 
-        assertEquals(0, test.getCardValue(3));
+        assertEquals(0, test.cardValue(3));
     }
 
     @Test
@@ -130,16 +130,16 @@ public class testPlayer
         Cards c3 = new Cards(10, Suit.Diamonds);
         Cards c4 = new Cards(1, Suit.Diamonds);
 
-        assertEquals(test.getValueTotal(), 0);
+        assertEquals(test.valueTotal(), 0);
 
         test.addHand(c1);
         test.addHand(c2);
-        assertEquals(test.getValueTotal(), 10);
+        assertEquals(test.valueTotal(), 10);
 
         test.addHand(c3);
-        assertEquals(test.getValueTotal(), 20);
+        assertEquals(test.valueTotal(), 20);
 
         test.addHand(c4);
-        assertEquals(test.getValueTotal(), 21);
+        assertEquals(test.valueTotal(), 21);
     }
 }

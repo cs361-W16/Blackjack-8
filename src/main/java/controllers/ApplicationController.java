@@ -16,6 +16,10 @@
 
 package controllers;
 
+import models.Game;
+import models.Player;
+import models.Dealer;
+
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
@@ -58,6 +62,50 @@ public class ApplicationController {
 	//public Result audio() {
     //    return Results.html().template("assets/audio/"); add to shortcuts if audio to be added
     //}
+	
+	public Result gameGet(){
+        Game g = new Game();
+        //g.buildDeck();
+        //g.shuffle();
+        //g.dealFour();
+
+        return Results.json().render(g);
+    }
+	
+	public Result dealPost(Context context, Game g) {
+        if(context.getRequestPath().contains("deal")){
+			g.dealTwo();
+        }
+        return Results.json().render(g);
+    }
+	
+	public Result hitPost(Context context, Game g) {
+        if(context.getRequestPath().contains("hit")){
+            g.player.hit(g.deck);
+        }
+        return Results.json().render(g);
+    }
+	
+	public Result stayPost(Context context, Game g) {
+        if(context.getRequestPath().contains("stay")){
+            g.player.stand();
+        }
+        return Results.json().render(g);
+    }
+	
+	public Result splitPost(Context context, Game g) {
+        if(context.getRequestPath().contains("split")){
+            g.player.split();
+        }
+        return Results.json().render(g);
+    }
+	
+	public Result doubledPost(Context context, Game g) {
+        if(context.getRequestPath().contains("doubled")){
+            g.player.doubleDown(g.deck);
+        }
+        return Results.json().render(g);
+    }
     
 
 }
