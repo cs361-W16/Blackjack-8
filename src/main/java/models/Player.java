@@ -66,7 +66,7 @@ public class Player{
         bet();
     }
 
-    public int valueTotal(){
+    public int getValueTotal(){
         int sum = 0;
         int suitValue;
         int aces = 0;

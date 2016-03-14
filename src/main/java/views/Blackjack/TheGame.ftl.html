@@ -37,7 +37,7 @@
 				</div>
 
 				<div class="rules">
-					<p style="font-size: 20px;">Rules</p>
+					<p style="font-size: 20px; margin-top: 5px;">Rules</p>
 					<object type="text/html" data="/Rules" style=" width: 90%; height: 75%; color: white;"></object>
 				</div>	
 		</div>
@@ -61,9 +61,9 @@
 					</div>
 				</div>
 
-				<div class="money">
-					<p style="font-size: 20px;">Money</p>
-					<object type="text/html" data="/Money" style="width: 90%; height: 75%; color: white;"></object>
+				<div class="money" id="cash">
+					<p style="font-size: 20px; margin-top: 5px;"></p>
+					<tr><p style="vertical-align: center; text-align: center; margin-top: 20px;">Your Money: </p><td><p class="bank" id="sum" style="font-size: 32px; margin-top: 50px;"></p></td></tr>
 				</div>
 		</div>
 
@@ -81,7 +81,6 @@ console.log(game);
 $( '.person .hand' ).html("");
 
 	$.each(game.dealer.DealerHand, function( key, val ) {
-		hideify(key, val);
 		$( '#hd1 #d'+key ).html(hideify(key, val));
 	});
 
@@ -93,6 +92,9 @@ $( '.person .hand' ).html("");
         $( '#hd2 #s'+key ).html("<td>"+"<p style=\"margin-top: 5px;\">"+val.value+"</p>"+"<BR>"+"<p class=\"suit\">"+symbolize(val.suit)+"</p>"+"</td>");
     });
 
+$( '.money .bank' ).html("");	
+	$( '#cash #sum' ).html("$"+game.player.pot);
+		
 }
 
 <!-- hides the first card from player's view until they hit the STAY button -->
