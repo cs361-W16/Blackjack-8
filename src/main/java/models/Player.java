@@ -66,7 +66,7 @@ public class Player{
         bet();
     }
 
-    public int getValueTotal(){
+    public int valueTotal(){
         int sum = 0;
         int suitValue;
         int aces = 0;
@@ -91,7 +91,7 @@ public class Player{
         return sum;
     }
 
-    public int getCardValue(int index)
+    public int cardValue(int index)
     {
         if(PlayerHand.size() < index)
         {
