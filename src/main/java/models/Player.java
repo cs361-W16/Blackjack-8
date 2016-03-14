@@ -13,7 +13,7 @@ public class Player{
     public java.util.List<Cards> PlayerHand;
     public java.util.List<Cards> SplitHand = new ArrayList<>();
     boolean turnEnd;
-	
+    boolean bust, bustSplit;
 	
     public Player(){
         //super();
@@ -27,9 +27,18 @@ public class Player{
         PlayerHand.add(card);
     }
 
+    public void addHandSplit(Cards card){
+        SplitHand.add(card);
+    }
+
     //Four actions for player: hit, stand, double down, or spit
     public void hit(ArrayList<Cards> deck){
         addHand(deck.get(deck.size()-1));
+        deck.remove(deck.size()-1);
+    }
+
+    public void hitSplit(ArrayList<Cards> deck){
+        addHandSplit(deck.get(deck.size()-1));
         deck.remove(deck.size()-1);
     }
 
@@ -91,24 +100,72 @@ public class Player{
         return sum;
     }
 
+    public int valueTotalSplit(){
+        int sum = 0;
+        int suitValue;
+        int aces = 0;
+        for (int i = 0; i < SplitHand.size(); i++) {
+            suitValue = SplitHand.get(i).getValue();
+            if (suitValue > 9){
+                suitValue = 10;
+            }else if(suitValue == 1){
+                aces++;
+                suitValue = 11;
+            }
+            sum += suitValue;
+        }
+
+        if(sum > 21) {
+            for (int i = 0; i < aces; i++) {
+                sum -= 10;
+                if (sum < 22)
+                    break;
+            }
+        }
+        return sum;
+    }
+
     public int cardValue(int index)
     {
-        if(PlayerHand.size() < index)
-        {
-            return 0;
-        } else {
-            return PlayerHand.get(index).getValue();
-        }
+        if(PlayerHand.size() < index) { return 0; }
+        else { return PlayerHand.get(index).getValue(); }
+    }
+
+    public int cardValueSplit(int index)
+    {
+        if(SplitHand.size() < index) { return 0; }
+        else { return SplitHand.get(index).getValue(); }
     }
 
     public Suit getCardSuit(int index)
     {
-        if(PlayerHand.size() < index)
-        {
-            return Suit.BadSuit;
-        } else {
-            return PlayerHand.get(index).getSuit();
-        }
+        if(PlayerHand.size() < index) { return Suit.BadSuit; }
+        else { return PlayerHand.get(index).getSuit(); }
     }
 
+    public Suit getCardSuitSplit(int index)
+    {
+        if(SplitHand.size() < index) { return Suit.BadSuit; }
+        else { return SplitHand.get(index).getSuit(); }
+    }
+
+    public boolean getBust()
+    {
+        int total = valueTotal();
+
+        if(total > 21) { bust = true; }
+        else { bust = false; }
+
+        return bust;
+    }
+
+    public boolean getBustSplit()
+    {
+        int total = valueTotalSplit();
+
+        if(total > 21) { bust = true; }
+        else { bust = false; }
+
+        return bust;
+    }
 }

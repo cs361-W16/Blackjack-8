@@ -20,6 +20,17 @@ public class testPlayer
     }
 
     @Test
+    public void testAddHandSplit()
+    {
+        Player test = new Player();
+        Cards c1 = new Cards(2, Suit.Diamonds);
+
+        test.addHandSplit(c1);
+        assertEquals(2, test.cardValueSplit(0));
+        assertEquals(Suit.Diamonds, test.getCardSuitSplit(0));
+    }
+
+    @Test
     public void testGetCardValue()
     {
         Player test = new Player();
@@ -29,6 +40,18 @@ public class testPlayer
         assertEquals(2, test.cardValue(0));
 
         assertEquals(0, test.cardValue(3));
+    }
+
+    @Test
+    public void testCardValueSplit()
+    {
+        Player test = new Player();
+        Cards c1 = new Cards(2, Suit.Diamonds);
+
+        test.addHandSplit(c1);
+        assertEquals(2, test.cardValueSplit(0));
+
+        assertEquals(0, test.cardValueSplit(3));
     }
 
     @Test
@@ -44,6 +67,18 @@ public class testPlayer
     }
 
     @Test
+    public void testGetCardSuitSplit()
+    {
+        Player test = new Player();
+        Cards c1 = new Cards(2, Suit.Diamonds);
+
+        test.addHandSplit(c1);
+        assertEquals(Suit.Diamonds, test.getCardSuitSplit(0));
+
+        assertEquals(Suit.BadSuit, test.getCardSuitSplit(3));
+    }
+
+    @Test
     public void testHit()
     {
         Game test = new Game();
@@ -51,6 +86,17 @@ public class testPlayer
 
         test.player.hit(test.deck);
         int handHitSize = test.player.PlayerHand.size();
+        assertNotEquals(handSize, handHitSize);
+    }
+
+    @Test
+    public void testHitSplit()
+    {
+        Game test = new Game();
+        int handSize = test.player.SplitHand.size();
+
+        test.player.hitSplit(test.deck);
+        int handHitSize = test.player.SplitHand.size();
         assertNotEquals(handSize, handHitSize);
     }
 
@@ -122,7 +168,7 @@ public class testPlayer
     }
 
     @Test
-    public void testGetValueTotal()
+    public void testValueTotalSplit()
     {
         Player test = new Player();
         Cards c1 = new Cards(5, Suit.Diamonds);
@@ -130,16 +176,48 @@ public class testPlayer
         Cards c3 = new Cards(10, Suit.Diamonds);
         Cards c4 = new Cards(1, Suit.Diamonds);
 
-        assertEquals(test.valueTotal(), 0);
+        assertEquals(test.valueTotalSplit(), 0);
+
+        test.addHandSplit(c1);
+        test.addHandSplit(c2);
+        assertEquals(test.valueTotalSplit(), 10);
+
+        test.addHandSplit(c3);
+        assertEquals(test.valueTotalSplit(), 20);
+
+        test.addHandSplit(c4);
+        assertEquals(test.valueTotalSplit(), 21);
+    }
+
+    @Test
+    public void testGetBust()
+    {
+        Player test = new Player();
+        Cards c1 = new Cards(10, Suit.Diamonds);
 
         test.addHand(c1);
-        test.addHand(c2);
         assertEquals(test.valueTotal(), 10);
+        assertEquals(test.getBust(), false);
 
-        test.addHand(c3);
-        assertEquals(test.valueTotal(), 20);
+        test.addHand(c1);
+        test.addHand(c1);
+        assertEquals(test.valueTotal(), 30);
+        assertEquals(test.getBust(), true);
+    }
 
-        test.addHand(c4);
-        assertEquals(test.valueTotal(), 21);
+    @Test
+    public void testGetBustSplit()
+    {
+        Player test = new Player();
+        Cards c1 = new Cards(10, Suit.Diamonds);
+
+        test.addHandSplit(c1);
+        assertEquals(test.valueTotalSplit(), 10);
+        assertEquals(test.getBustSplit(), false);
+
+        test.addHandSplit(c1);
+        test.addHandSplit(c1);
+        assertEquals(test.valueTotalSplit(), 30);
+        assertEquals(test.getBustSplit(), true);
     }
 }

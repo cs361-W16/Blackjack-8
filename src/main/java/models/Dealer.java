@@ -9,10 +9,12 @@ import java.util.ArrayList;
 public class Dealer{
     public java.util.List<Cards> DealerHand;
     boolean turnEnd;
+    boolean bust;
 
     Dealer(){
         DealerHand = new ArrayList<>();
         turnEnd = false;
+        bust = false;
     }
 
     public void addhand(Cards card){
@@ -58,5 +60,19 @@ public class Dealer{
             hit(deck);
         }
         stand();
+    }
+
+    public boolean getBust()
+    {
+        int total = valueTotal();
+        if(total > 21)
+        {
+            bust = true;
+        }
+        else
+        {
+            bust = false;
+        }
+        return bust;
     }
 }
