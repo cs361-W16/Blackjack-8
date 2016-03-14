@@ -28,7 +28,7 @@ public class Dealer{
         turnEnd = true;
     }
 
-    public int getValueTotal(){
+    public int valueTotal(){
         int sum = 0;
         int suitValue;
         int aces = 0;
@@ -54,7 +54,7 @@ public class Dealer{
     }
 
     public void less17(ArrayList<Cards> deck){
-        while(getValueTotal() < 17){
+        while(valueTotal() < 17){
             hit(deck);
         }
         stand();

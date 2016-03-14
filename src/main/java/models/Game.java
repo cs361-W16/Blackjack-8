@@ -8,7 +8,7 @@ import java.util.Random;
  * Created by Jason Ye on 3/9/2016.
  */
 public class Game {
-    public ArrayList<Cards> deck;
+    public ArrayList<Cards> deck = new ArrayList<Cards>();;
     public Player player;
     public Dealer dealer;
 
@@ -17,12 +17,12 @@ public class Game {
         shuffle();
         player = new Player();
         dealer = new Dealer();
-        dealTwo();
+		dealTwo();
         //should call a play function that loops until win status has happened
     }
 
     public void buildDeck(){
-        deck = new ArrayList<Cards>();
+        
         for(int i = 1; i < 14; i++) {
             deck.add(new Cards(i, Suit.Clubs));
             deck.add(new Cards(i, Suit.Diamonds));
