@@ -13,9 +13,10 @@ public class Player{
     public java.util.List<Cards> PlayerHand;
     public java.util.List<Cards> SplitHand = new ArrayList<>();
     boolean turnEnd;
-
+	
+	
     public Player(){
-        super();
+        //super();
         pot = 100;
         PlayerBet = 2;
         PlayerHand = new ArrayList<>();

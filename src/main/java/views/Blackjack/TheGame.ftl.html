@@ -2,6 +2,7 @@
 <@layout.myLayout "Blackjack...">    
 
 <link href="../../assets/css/custom.css" rel="stylesheet">
+<script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
 
 <body style="text-align: center; background: radial-gradient(black, #222222); color: white;">
 
@@ -26,9 +27,9 @@
 <div class="outer_container">
 		
 		<div style="position:absolute; width: 100%; top: 0px;">
-				<div class="dealer">
+				<div class="dealer person" id="hd1">
 					<table>
-						<tr><td><p>this table holds the dealer's cards</p></td></tr>
+						<tr><td class="hand" id="d0"></td><td class="hand" id="d1"></td><td class="hand" id="d2"></td><td class="hand" id="d3"></td><td class="hand" id="d4"></td><td class="hand" id="d5"></td><td class="hand" id="d6"></td><td class="hand" id="d7"></td><td class="hand" id="d8"></td><td class="hand" id="d9"></td><td class="hand" id="d10"></td></tr>
 					</table>
 					<div style="position: absolute; width: 100%; bottom: 0px;">
 							<button id="deal">DEAL</button>
@@ -36,8 +37,8 @@
 				</div>
 
 				<div class="rules">
-					<p style="font-size: 20px;">Rules</p>
-					<object type="text/html" data="/Rules" style=" width: 90%; height: 75%; color: white;""></object>
+					<p style="font-size: 20px; margin-top: 5px;">Rules</p>
+					<object type="text/html" data="/Rules" style=" width: 90%; height: 75%; color: white;"></object>
 				</div>	
 		</div>
 		
@@ -45,30 +46,163 @@
 		<BR>
 		
 		<div style="position:absolute; width: 100%; bottom: 0px;">
-				<div class="player">
+				<div class="player person" id="hd2">
 					<table> 
-						<tr><td><p>this table holds the player's cards</p></td></tr>
+						<tr><td class="hand" id="p0"></td><td class="hand" id="p1"></td><td class="hand" id="p2"></td><td class="hand" id="p3"></td><td class="hand" id="p4"></td><td class="hand" id="p5"></td><td class="hand" id="p6"></td><td class="hand" id="p7"></td><td class="hand" id="p8"></td><td class="hand" id="p9"></td><td class="hand" id="p10"></td></tr>
 					</table>
 					<table>
-						<tr><td><p>if split use this table</p></td></tr>
+						<tr><td class="hand" id="s0"></td><td class="hand" id="s1"></td><td class="hand" id="s2"></td><td class="hand" id="s3"></td><td class="hand" id="s4"></td><td class="hand" id="s5"></td><td class="hand" id="s6"></td><td class="hand" id="s7"></td><td class="hand" id="s8"></td><td class="hand" id="s9"></td><td class="hand" id="s10"></td></tr>
 					</table>
 					<div style="position: absolute; width: 100%; bottom: 0px;">
 							<button id="hit">HIT</button>
 							<button id="stay">STAY</button>
 							<button id="split">SPLIT</button>
+							<button id="doubled">DOUBLE</button>
 					</div>
 				</div>
 
-				<div class="money">
-					<p style="font-size: 20px;">Money</p>
-					<object type="text/html" data="/Money" style="width: 90%; height: 75%; color: white;"></object>
+				<div class="money" id="cash">
+					<p style="font-size: 20px; margin-top: 5px;"></p>
+					<tr><p style="vertical-align: center; text-align: center; margin-top: 20px;">Your Money: </p><td><p class="bank" id="sum" style="font-size: 32px; margin-top: 50px;"></p></td></tr>
 				</div>
 		</div>
 
 </div>
 
-<BR>
+<script>
 
+var game;
+var replaceSuit;
+var stayClick = false;
+
+function display(game) {
+console.log(game);
+
+$( '.person .hand' ).html("");
+
+	$.each(game.dealer.DealerHand, function( key, val ) {
+		$( '#hd1 #d'+key ).html(hideify(key, val));
+	});
+
+	$.each(game.player.PlayerHand, function( key, val ) {
+		$( '#hd2 #p'+key ).html("<td>"+"<p style=\"margin-top: 5px;\">"+val.value+"</p>"+"<BR>"+"<p class=\"suit\">"+symbolize(val.suit)+"</p>"+"</td>");
+	});
+
+	$.each(game.player.SplitHand, function( key, val ) {
+        $( '#hd2 #s'+key ).html("<td>"+"<p style=\"margin-top: 5px;\">"+val.value+"</p>"+"<BR>"+"<p class=\"suit\">"+symbolize(val.suit)+"</p>"+"</td>");
+    });
+
+$( '.money .bank' ).html("");	
+	$( '#cash #sum' ).html("$"+game.player.pot);
+		
+}
+
+<!-- hides the first card from player's view until they hit the STAY button -->
+
+function hideify(key, val){
+		
+		if((key == 0) && (stayClick == false)){
+			return "<td><p style=\"margin-top: 5px;\">. . .</p><BR><p class=\"suit\">?</p></td>";
+		}else{
+			return "<td><p style=\"margin-top: 5px;\">"+val.value+"</p><BR><p class=\"suit\">"+symbolize(val.suit)+"</p></td>";
+		}
+
+}
+
+<!-- does the symbol thing -->
+
+function symbolize(replaceSuit) {
+	if(replaceSuit == "Clubs"){
+		return "&#9827;";
+	}else if(replaceSuit == "Spades"){
+		return "&#9824;";
+	}else if(replaceSuit == "Diamonds"){
+		return "&#9830;";
+	}else if(replaceSuit == "Hearts"){
+		return "&#9829;";
+	}else{
+		return replaceSuit;
+	}
+}
+
+$.getJSON("http://localhost:8080/game", function( data ) {
+display(data);
+game = data;
+});
+
+<!-- buttons -->
+
+$("#deal").click(function(){
+$.ajax({
+  type: "POST",
+  url: "/deal",
+  data: JSON.stringify(game),
+  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+        game = data;
+        display(data);},
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+});
+});
+
+$("#hit").click(function(){
+$.ajax({
+  type: "POST",
+  url: "/hit",
+  data: JSON.stringify(game),
+  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+        game = data;
+        display(data);},
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+});
+});
+
+$("#stay").click(function(){
+stayClick = true;
+$.ajax({
+  type: "POST",
+  url: "/stay",
+  data: JSON.stringify(game),
+  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+        game = data;
+        display(data);},
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+});
+});
+
+$("#split").click(function(){
+$.ajax({
+  type: "POST",
+  url: "/split",
+  data: JSON.stringify(game),
+  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+        game = data;
+        display(data);},
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+});
+});
+
+$("#doubled").click(function(){
+$.ajax({
+  type: "POST",
+  url: "/doubled",
+  data: JSON.stringify(game),
+  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+        game = data;
+        display(data);},
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+});
+});
+
+
+
+</script>
+
+<BR>
 </body>
 
 </@layout.myLayout>
