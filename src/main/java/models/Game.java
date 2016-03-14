@@ -129,7 +129,7 @@ public class Game {
 			}
 
 			state = 0;
-		}else if(player.endTurn == false)
+		}else if(player.turnEnd == false)
 		{
 			
 			playerBust = player.getBust();
