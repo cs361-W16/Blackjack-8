@@ -168,4 +168,10 @@ public class Player{
 
         return bust;
     }
+	
+	public void winnings(int theWinnings){
+		
+		pot = pot+theWinnings;
+		
+	}
 }

@@ -75,6 +75,7 @@ public class ApplicationController {
 	public Result dealPost(Context context, Game g) {
         if(context.getRequestPath().contains("deal")){
 			g.dealTwo();
+			g.play();
         }
         return Results.json().render(g);
     }
@@ -82,6 +83,7 @@ public class ApplicationController {
 	public Result hitPost(Context context, Game g) {
         if(context.getRequestPath().contains("hit")){
             g.player.hit(g.deck);
+			g.play();
         }
         return Results.json().render(g);
     }
@@ -89,6 +91,7 @@ public class ApplicationController {
 	public Result stayPost(Context context, Game g) {
         if(context.getRequestPath().contains("stay")){
             g.player.stand();
+			g.play();
         }
         return Results.json().render(g);
     }
@@ -96,6 +99,7 @@ public class ApplicationController {
 	public Result splitPost(Context context, Game g) {
         if(context.getRequestPath().contains("split")){
             g.player.split();
+			g.play();
         }
         return Results.json().render(g);
     }
@@ -103,6 +107,8 @@ public class ApplicationController {
 	public Result doubledPost(Context context, Game g) {
         if(context.getRequestPath().contains("doubled")){
             g.player.doubleDown(g.deck);
+			g.player.stand();
+			g.play();
         }
         return Results.json().render(g);
     }

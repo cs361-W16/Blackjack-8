@@ -23,100 +23,306 @@ public class Game {
         shuffle();
         player = new Player();
         dealer = new Dealer();
-		dealTwo();
         //play
     }
 
 
     public void play()
     {
-        while(state == 1)
-        {
-            if(player.turnEnd == true)
-            {
-                playerBust = player.getBust();
-                playerScore = player.valueTotal();
-                dealer.less17(deck);
-                dealerBust = dealer.getBust();
-                dealerScore = dealer.valueTotal();
+		win = -1; 
+		winSplit = -1;
+		if(player.turnEnd == true)
+		{
+			playerBust = player.getBust();
+			playerScore = player.valueTotal();
+			dealer.less17(deck);
+			dealerBust = dealer.getBust();
+			dealerScore = dealer.valueTotal();
 
-                //Normal hand
-                if((dealerBust == false) && (playerBust == false))
-                {
-                    if((player.PlayerHand.size() == 2) && (playerScore == 21))
-                    {
-                        if((dealer.DealerHand.size() == 2) && (dealerScore == 21)){
-                            win = 0;
-                        } else {
-                            win = 3;
-                        }
-                    } else if (playerScore > dealerScore)
-                    {
-                        win = 1;
-                    } else if (dealerScore > playerScore)
-                    {
-                        win = 0;
-                    }
-                } else if ((dealerBust == true) && (playerBust == false))
-                {
-                    if((player.PlayerHand.size() == 2) && (playerScore == 21))
-                    {
-                        win = 3;
-                    } else
-                    {
-                        win = 1;
-                    }
-                } else if ((playerBust == true) && (dealerBust == false))
-                {
-                    win = 2;
-                } else
-                {
-                    win = 0;
-                }
+			//Normal hand
+			if((dealerBust == false) && (playerBust == false))
+			{
+				if((player.PlayerHand.size() == 2) && (playerScore == 21))
+				{
+					if((dealer.DealerHand.size() == 2) && (dealerScore == 21)){
+						win = 0;
+						player.winnings(win);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					} else {
+						win = 3;
+						player.winnings(win);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					}
+				} else if (playerScore > dealerScore)
+				{
+					win = 1;
+					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+				} else if (dealerScore > playerScore)
+				{
+					win = 0;
+					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+				}
+			} else if ((dealerBust == true) && (playerBust == false))
+			{
+				if((player.PlayerHand.size() == 2) && (playerScore == 21))
+				{
+					win = 3;
+					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+				} else
+				{
+					win = 1;
+					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+				}
+			} else if ((playerBust == true) && (dealerBust == false))
+			{
+				win = 2;
+				player.winnings(win);
+				player.turnEnd = false;
+				player.PlayerHand.clear();
+				player.SplitHand.clear();
+				dealer.DealerHand.clear();
+				return;
+			} else
+			{
+				win = 0;
+				player.winnings(win);
+				player.turnEnd = false;
+				player.PlayerHand.clear();
+				player.SplitHand.clear();
+				dealer.DealerHand.clear();
+				return;
+			}
 
-                //If player split
-                if(player.split == 1)
-                {
-                    playerBustSplit = player.getBustSplit();
-                    playerScoreSplit = player.valueTotalSplit();
+			//If player split
+			if(player.split == 1)
+			{
+				playerBustSplit = player.getBustSplit();
+				playerScoreSplit = player.valueTotalSplit();
 
-                    if((dealerBust == false) && (playerBustSplit == false))
-                    {
-                        if((player.SplitHand.size() == 2) && (playerScoreSplit == 21))
-                        {
-                            if((dealer.DealerHand.size() == 2) && (dealerScore == 21)){
-                                winSplit = 0;
-                            } else {
-                                winSplit = 3;
-                            }
-                        } else if (playerScoreSplit > dealerScore)
-                        {
-                            winSplit = 1;
-                        } else if (dealerScore > playerScoreSplit)
-                        {
-                            winSplit = 0;
-                        }
-                    } else if ((dealerBust == true) && (playerBustSplit == false))
-                    {
-                        if((player.SplitHand.size() == 2) && (playerScoreSplit == 21))
-                        {
-                            winSplit = 3;
-                        } else
-                        {
-                            winSplit = 1;
-                        }
-                    } else if ((playerBustSplit == true) && (dealerBust == false))
-                    {
-                        winSplit = 2;
-                    } else
-                    {
-                        winSplit = 0;
-                    }
-                }
+				if((dealerBust == false) && (playerBustSplit == false))
+				{
+					if((player.SplitHand.size() == 2) && (playerScoreSplit == 21))
+					{
+						if((dealer.DealerHand.size() == 2) && (dealerScore == 21)){
+							winSplit = 0;
+							player.winnings(winSplit);
+							player.turnEnd = false;
+							player.PlayerHand.clear();
+							player.SplitHand.clear();
+							dealer.DealerHand.clear();
+							return;
+						} else {
+							winSplit = 3;
+							player.winnings(winSplit);
+							player.turnEnd = false;
+							player.PlayerHand.clear();
+							player.SplitHand.clear();
+							dealer.DealerHand.clear();
+							return;
+						}
+					} else if (playerScoreSplit > dealerScore)
+					{
+						winSplit = 1;
+						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					} else if (dealerScore > playerScoreSplit)
+					{
+						winSplit = 0;
+						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					}
+				} else if ((dealerBust == true) && (playerBustSplit == false))
+				{
+					if((player.SplitHand.size() == 2) && (playerScoreSplit == 21))
+					{
+						winSplit = 3;
+						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					} else
+					{
+						winSplit = 1;
+						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					}
+				} else if ((playerBustSplit == true) && (dealerBust == false))
+				{
+					winSplit = 2;
+					player.winnings(winSplit);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+				} else
+				{
+					winSplit = 0;
+					player.winnings(winSplit);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+				}
+			}
+		}else if(player.turnEnd == false)
+		{
+			
+			playerBust = player.getBust();
+			playerScore = player.valueTotal();
+			
+			if(playerBust == true){
+				
+				dealer.less17(deck);
+				dealerBust = dealer.getBust();
+				dealerScore = dealer.valueTotal();
+				
+				if(dealerBust == true){
+					
+					win = 1;
+					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+					
+				}else{
+					
+					win = 0;
+					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+					
+				}
+			}
+			//If player split
+			if(player.split == 1)
+			{
+				playerBustSplit = player.getBustSplit();
+				playerScoreSplit = player.valueTotalSplit();
 
-                state = 0;
-            }
-        }
+				if((dealerBust == false) && (playerBustSplit == false))
+				{
+					if((player.SplitHand.size() == 2) && (playerScoreSplit == 21))
+					{
+						if((dealer.DealerHand.size() == 2) && (dealerScore == 21)){
+							winSplit = 0;
+							player.winnings(winSplit);
+							player.turnEnd = false;
+							player.PlayerHand.clear();
+							player.SplitHand.clear();
+							dealer.DealerHand.clear();
+						return;
+						} else {
+							winSplit = 3;
+							player.winnings(winSplit);
+							player.turnEnd = false;
+							player.PlayerHand.clear();
+							player.SplitHand.clear();
+							dealer.DealerHand.clear();
+						return;
+						}
+					} else if (playerScoreSplit > dealerScore)
+					{
+						winSplit = 1;
+						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					} else if (dealerScore > playerScoreSplit)
+					{
+						winSplit = 0;
+						player.winnings(winSplit);
+						return;
+					}
+				} else if ((dealerBust == true) && (playerBustSplit == false))
+				{
+					if((player.SplitHand.size() == 2) && (playerScoreSplit == 21))
+					{
+						winSplit = 3;
+						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					} else
+					{
+						winSplit = 1;
+						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
+					}
+				} else if ((playerBustSplit == true) && (dealerBust == false))
+				{
+					winSplit = 0;
+					player.winnings(winSplit);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
+				} else
+				{
+					winSplit = 0;
+					player.winnings(winSplit);
+					return;
+				}
+			}
+			
+		}
         //Whatever we want to happen after the game ends
     }
 
