@@ -51,6 +51,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					} else {
 						win = 3;
@@ -59,6 +62,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					}
 				} else if (playerScore > dealerScore)
@@ -69,6 +75,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 				} else if (dealerScore > playerScore)
 				{
@@ -78,6 +87,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 				}
 			} else if ((dealerBust == true) && (playerBust == false))
@@ -90,6 +102,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 				} else
 				{
@@ -99,6 +114,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 				}
 			} else if ((playerBust == true) && (dealerBust == false))
@@ -109,6 +127,9 @@ public class Game {
 				player.PlayerHand.clear();
 				player.SplitHand.clear();
 				dealer.DealerHand.clear();
+				deck.clear();
+				buildDeck();
+				shuffle();
 				return;
 			} else
 			{
@@ -118,6 +139,9 @@ public class Game {
 				player.PlayerHand.clear();
 				player.SplitHand.clear();
 				dealer.DealerHand.clear();
+				deck.clear();
+				buildDeck();
+				shuffle();
 				return;
 			}
 
@@ -138,6 +162,9 @@ public class Game {
 							player.PlayerHand.clear();
 							player.SplitHand.clear();
 							dealer.DealerHand.clear();
+							deck.clear();
+							buildDeck();
+							shuffle();
 							return;
 						} else {
 							winSplit = 3;
@@ -146,6 +173,9 @@ public class Game {
 							player.PlayerHand.clear();
 							player.SplitHand.clear();
 							dealer.DealerHand.clear();
+							deck.clear();
+							buildDeck();
+							shuffle();
 							return;
 						}
 					} else if (playerScoreSplit > dealerScore)
@@ -156,6 +186,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					} else if (dealerScore > playerScoreSplit)
 					{
@@ -165,6 +198,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					}
 				} else if ((dealerBust == true) && (playerBustSplit == false))
@@ -177,6 +213,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					} else
 					{
@@ -186,6 +225,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					}
 				} else if ((playerBustSplit == true) && (dealerBust == false))
@@ -196,6 +238,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 				} else
 				{
@@ -205,6 +250,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 				}
 			}
@@ -228,6 +276,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 					
 				}else{
@@ -238,6 +289,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 					
 				}
@@ -259,6 +313,9 @@ public class Game {
 							player.PlayerHand.clear();
 							player.SplitHand.clear();
 							dealer.DealerHand.clear();
+							deck.clear();
+							buildDeck();
+							shuffle();
 						return;
 						} else {
 							winSplit = 3;
@@ -267,7 +324,10 @@ public class Game {
 							player.PlayerHand.clear();
 							player.SplitHand.clear();
 							dealer.DealerHand.clear();
-						return;
+							deck.clear();
+							buildDeck();
+							shuffle();
+							return;
 						}
 					} else if (playerScoreSplit > dealerScore)
 					{
@@ -277,6 +337,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					} else if (dealerScore > playerScoreSplit)
 					{
@@ -294,6 +357,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					} else
 					{
@@ -303,6 +369,9 @@ public class Game {
 						player.PlayerHand.clear();
 						player.SplitHand.clear();
 						dealer.DealerHand.clear();
+						deck.clear();
+						buildDeck();
+						shuffle();
 						return;
 					}
 				} else if ((playerBustSplit == true) && (dealerBust == false))
@@ -313,6 +382,9 @@ public class Game {
 					player.PlayerHand.clear();
 					player.SplitHand.clear();
 					dealer.DealerHand.clear();
+					deck.clear();
+					buildDeck();
+					shuffle();
 					return;
 				} else
 				{
