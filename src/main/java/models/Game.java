@@ -29,7 +29,8 @@ public class Game {
 
     public void play()
     {
-	
+		win = -1; 
+		winSplit = -1;
 		if(player.turnEnd == true)
 		{
 			playerBust = player.getBust();
@@ -46,18 +47,38 @@ public class Game {
 					if((dealer.DealerHand.size() == 2) && (dealerScore == 21)){
 						win = 0;
 						player.winnings(win);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					} else {
 						win = 3;
 						player.winnings(win);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					}
 				} else if (playerScore > dealerScore)
 				{
 					win = 1;
 					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 				} else if (dealerScore > playerScore)
 				{
 					win = 0;
 					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 				}
 			} else if ((dealerBust == true) && (playerBust == false))
 			{
@@ -65,19 +86,39 @@ public class Game {
 				{
 					win = 3;
 					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 				} else
 				{
 					win = 1;
 					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 				}
 			} else if ((playerBust == true) && (dealerBust == false))
 			{
 				win = 2;
 				player.winnings(win);
+				player.turnEnd = false;
+				player.PlayerHand.clear();
+				player.SplitHand.clear();
+				dealer.DealerHand.clear();
+				return;
 			} else
 			{
 				win = 0;
 				player.winnings(win);
+				player.turnEnd = false;
+				player.PlayerHand.clear();
+				player.SplitHand.clear();
+				dealer.DealerHand.clear();
+				return;
 			}
 
 			//If player split
@@ -93,18 +134,38 @@ public class Game {
 						if((dealer.DealerHand.size() == 2) && (dealerScore == 21)){
 							winSplit = 0;
 							player.winnings(winSplit);
+							player.turnEnd = false;
+							player.PlayerHand.clear();
+							player.SplitHand.clear();
+							dealer.DealerHand.clear();
+							return;
 						} else {
 							winSplit = 3;
 							player.winnings(winSplit);
+							player.turnEnd = false;
+							player.PlayerHand.clear();
+							player.SplitHand.clear();
+							dealer.DealerHand.clear();
+							return;
 						}
 					} else if (playerScoreSplit > dealerScore)
 					{
 						winSplit = 1;
 						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					} else if (dealerScore > playerScoreSplit)
 					{
 						winSplit = 0;
 						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					}
 				} else if ((dealerBust == true) && (playerBustSplit == false))
 				{
@@ -112,23 +173,41 @@ public class Game {
 					{
 						winSplit = 3;
 						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					} else
 					{
 						winSplit = 1;
 						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					}
 				} else if ((playerBustSplit == true) && (dealerBust == false))
 				{
 					winSplit = 2;
 					player.winnings(winSplit);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 				} else
 				{
 					winSplit = 0;
 					player.winnings(winSplit);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 				}
 			}
-
-			state = 0;
 		}else if(player.turnEnd == false)
 		{
 			
@@ -145,11 +224,21 @@ public class Game {
 					
 					win = 1;
 					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 					
 				}else{
 					
 					win = 0;
 					player.winnings(win);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 					
 				}
 			}
@@ -166,18 +255,34 @@ public class Game {
 						if((dealer.DealerHand.size() == 2) && (dealerScore == 21)){
 							winSplit = 0;
 							player.winnings(winSplit);
+							player.turnEnd = false;
+							player.PlayerHand.clear();
+							player.SplitHand.clear();
+							dealer.DealerHand.clear();
+						return;
 						} else {
 							winSplit = 3;
 							player.winnings(winSplit);
+							player.turnEnd = false;
+							player.PlayerHand.clear();
+							player.SplitHand.clear();
+							dealer.DealerHand.clear();
+						return;
 						}
 					} else if (playerScoreSplit > dealerScore)
 					{
 						winSplit = 1;
 						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					} else if (dealerScore > playerScoreSplit)
 					{
 						winSplit = 0;
 						player.winnings(winSplit);
+						return;
 					}
 				} else if ((dealerBust == true) && (playerBustSplit == false))
 				{
@@ -185,19 +290,35 @@ public class Game {
 					{
 						winSplit = 3;
 						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					} else
 					{
 						winSplit = 1;
 						player.winnings(winSplit);
+						player.turnEnd = false;
+						player.PlayerHand.clear();
+						player.SplitHand.clear();
+						dealer.DealerHand.clear();
+						return;
 					}
 				} else if ((playerBustSplit == true) && (dealerBust == false))
 				{
-					winSplit = 2;
+					winSplit = 0;
 					player.winnings(winSplit);
+					player.turnEnd = false;
+					player.PlayerHand.clear();
+					player.SplitHand.clear();
+					dealer.DealerHand.clear();
+					return;
 				} else
 				{
 					winSplit = 0;
 					player.winnings(winSplit);
+					return;
 				}
 			}
 			
